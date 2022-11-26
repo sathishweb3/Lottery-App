@@ -25,7 +25,7 @@ function spin() internal view returns(uint){
     return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players.length)
     ));
 }
-function finalWinner() public returns (address){
+function finalWinner() public{
     require(msg.sender == owner, "You are not the owner");
     require(players.length>=3, "Players must be atleast 3 members");
     address payable winner;
@@ -34,8 +34,6 @@ function finalWinner() public returns (address){
     winner = players[index];
     winner.transfer(getBalance());
     players = new address payable[](0);
-    return winner;
+
 }
-
-
 }
